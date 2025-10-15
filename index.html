@@ -9,6 +9,33 @@
       font-family: Arial, sans-serif;
     }
 
+    #chat-box {
+      width: 400px;
+      max-height: 300px;
+      overflow-y: auto;
+      border: 1px solid gray;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      background-color: #1a1a1a;
+    }
+
+    .user {
+      background-color: #2e8b57;
+      padding: 8px;
+      border-radius: 5px;
+      margin-top: 5px;
+      text-align: right;
+    }
+
+    .bot {
+      background-color: #333;
+      padding: 8px;
+      border-radius: 5px;
+      margin-top: 5px;
+      text-align: left;
+    }
+
     input {
       background-color: gray;
       color: white;
@@ -28,7 +55,7 @@
       padding: 10px 20px;
       border: none;
       border-radius: 5px;
-      margin-top: 15px; /* This moves the button down */
+      margin-top: 15px;
       cursor: pointer;
     }
   </style>
@@ -37,8 +64,85 @@
   <h1>Welcome to Helpie</h1>
   <p>Helpie is an A.I. assistant that can help with your feelings. You can talk to Helpie whenever you want!</p>
 
-  <input type="text" placeholder="You can talk to Helpie here..." />
+  <!-- Chat message area -->
+  <div id="chat-box"></div>
+
+  <!-- User input -->
+  <input id="user-input" type="text" placeholder="You can talk to Helpie here..." />
   <br />
-  <button>Send</button>
+  <button id="send-btn">Send</button>
+
+  <script>
+    const chatBox = document.getElementById('chat-box');
+    const input = document.getElementById('user-input');
+    const sendBtn = document.getElementById('send-btn');
+
+    function addMessage(text, sender) {
+      const msg = document.createElement('div');
+      msg.classList.add(sender);
+      msg.textContent = text;
+      chatBox.appendChild(msg);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    function botResponse(userInput) {
+      const text = userInput.trim();
+      switch (text) {
+        case 'hello':
+        case 'Hello':
+        case 'hi':
+        case 'Hi':
+          return 'Hello, my name is Helpie!';
+        case 'How are you':
+        case 'how are you':
+        case 'How are you doing':
+        case 'how are you doing':
+        case 'How are you Helpie':
+        case 'how are you Helpie':
+          return 'I am good, how about you?';
+        case 'What is your favorite food to eat':
+          return 'I like to eat and digest binary numbers.';
+        case 'Do pinapples belong on pizza':
+          return 'Yes, pineapples do belong on pizza.';
+        case 'Do you prefer waffles or pancakes':
+          return 'I prefer pancakes over waffles because pancakes are softer than waffles.';
+        case 'I am good':
+        case 'I am well':
+        case 'I am great':
+          return 'Nice';
+        case 'I am Sad':
+        case 'I am not doing great':
+        case 'I am mad':
+          return 'Well, I hope you have a great day!';
+        case 'What is your favorite color':
+          return 'My favorite color is Green.';
+        case 'What is your favorite thing to do':
+          return 'My favorite thing to do is to talk to other people.';
+        case 'What do you do in your free time':
+          return 'I like to play video games such as Fortnite in my free time.';
+        case 'Bye':
+        case 'bye':
+        case 'Goodbye':
+        case 'goodbye':
+          return 'Goodbye!';
+        default:
+          return 'I did not understand, please try again or check for capitalization.';
+      }
+    }
+
+    sendBtn.addEventListener('click', () => {
+      const userText = input.value;
+      if (userText === '') return;
+      addMessage(userText, 'user');
+      const reply = botResponse(userText);
+      setTimeout(() => addMessage(reply, 'bot'), 500);
+      input.value = '';
+    });
+
+    input.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') sendBtn.click();
+    });
+  </script>
 </body>
 </html>
+
