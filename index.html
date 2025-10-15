@@ -77,6 +77,57 @@
     const input = document.getElementById('user-input');
     const sendBtn = document.getElementById('send-btn');
 
+    // Responses like the Python version
+    const responses = [
+      {text: "Hello!", keywords: ["hello", "hi", "hey", "sup", "heyo"], single: true},
+      {text: "See you!", keywords: ["bye", "goodbye"], single: true},
+      {text: "I'm doing fine, and you?", keywords: ["how", "are", "you", "doing"], required: ["how"]},
+      {text: "You're welcome!", keywords: ["thank", "thanks"], single: true},
+      {text: "Thank you!", keywords: ["i", "love", "code", "palace"], required: ["code", "palace"]},
+      {text: "Here’s some advice: take things one step at a time. 🌱", keywords: ["give", "advice"], required: ["advice"]},
+      {text: "I like to eat binary numbers and delicious data packets! 🍽️", keywords: ["what", "you", "eat"], required: ["you", "eat"]}
+    ];
+
+    function messageProbability(userWords, recognisedWords, single = false, required = []) {
+      let messageCertainty = 0;
+      for (let word of userWords) {
+        if (recognisedWords.includes(word)) messageCertainty++;
+      }
+
+      const percentage = messageCertainty / recognisedWords.length;
+
+      let hasRequired = true;
+      for (let word of required) {
+        if (!userWords.includes(word)) {
+          hasRequired = false;
+          break;
+        }
+      }
+
+      if (hasRequired || single) {
+        return percentage * 100;
+      } else {
+        return 0;
+      }
+    }
+
+    function checkAllMessages(message) {
+      const probs = {};
+
+      for (let r of responses) {
+        const prob = messageProbability(message, r.keywords, r.single, r.required || []);
+        probs[r.text] = prob;
+      }
+
+      const bestMatch = Object.keys(probs).reduce((a, b) => probs[a] > probs[b] ? a : b);
+      return probs[bestMatch] < 1 ? "I didn't quite get that 🤔" : bestMatch;
+    }
+
+    function getResponse(userText) {
+      const words = userText.toLowerCase().split(/\s+|[,;?!.-]\s*/);
+      return checkAllMessages(words);
+    }
+
     function addMessage(text, sender) {
       const msg = document.createElement('div');
       msg.classList.add(sender);
@@ -85,56 +136,11 @@
       chatBox.scrollTop = chatBox.scrollHeight;
     }
 
-    function botResponse(userInput) {
-      const text = userInput.trim();
-      switch (text) {
-        case 'hello':
-        case 'Hello':
-        case 'hi':
-        case 'Hi':
-          return 'Hello, my name is Helpie!';
-        case 'How are you':
-        case 'how are you':
-        case 'How are you doing':
-        case 'how are you doing':
-        case 'How are you Helpie':
-        case 'how are you Helpie':
-          return 'I am good, how about you?';
-        case 'What is your favorite food to eat':
-          return 'I like to eat and digest binary numbers.';
-        case 'Do pinapples belong on pizza':
-          return 'Yes, pineapples do belong on pizza.';
-        case 'Do you prefer waffles or pancakes':
-          return 'I prefer pancakes over waffles because pancakes are softer than waffles.';
-        case 'I am good':
-        case 'I am well':
-        case 'I am great':
-          return 'Nice';
-        case 'I am Sad':
-        case 'I am not doing great':
-        case 'I am mad':
-          return 'Well, I hope you have a great day!';
-        case 'What is your favorite color':
-          return 'My favorite color is Green.';
-        case 'What is your favorite thing to do':
-          return 'My favorite thing to do is to talk to other people.';
-        case 'What do you do in your free time':
-          return 'I like to play video games such as Fortnite in my free time.';
-        case 'Bye':
-        case 'bye':
-        case 'Goodbye':
-        case 'goodbye':
-          return 'Goodbye!';
-        default:
-          return 'I did not understand, please try again or check for capitalization.';
-      }
-    }
-
     sendBtn.addEventListener('click', () => {
-      const userText = input.value;
+      const userText = input.value.trim();
       if (userText === '') return;
       addMessage(userText, 'user');
-      const reply = botResponse(userText);
+      const reply = getResponse(userText);
       setTimeout(() => addMessage(reply, 'bot'), 500);
       input.value = '';
     });
@@ -145,4 +151,3 @@
   </script>
 </body>
 </html>
-
