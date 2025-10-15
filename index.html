@@ -1,16 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Helpie</title>
+  <title>Welcome to Helpie</title>
+  <style>
+    body {
+      background-color: black;
+      color: white;
+      font-family: Arial, sans-serif;
+    }
+
+    input {
+      background-color: gray;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      width: 300px;
+    }
+
+    input::placeholder {
+      color: white;
+    }
+
+    button {
+      background-color: blue;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      margin-top: 15px; /* This moves the button down */
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
-    <h1>Welcome to Helpie</h1>
-    <p>Helpie is an A.I. assistant that can help about your feelings. You can talk to Helpie when ever you want!</p>
-    <textarea placeholder="You can talk to Helpie here..." rows="10" cols="50"></textarea>
-    <br>
-    <button style="background-color: blue; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">
-        Send
-    </button>
+  <h1>Welcome to Helpie</h1>
+  <p>Helpie is an A.I. assistant that can help with your feelings. You can talk to Helpie whenever you want!</p>
+
+  <input type="text" placeholder="You can talk to Helpie here..." />
+  <br />
+  <button>Send</button>
 </body>
 </html>
