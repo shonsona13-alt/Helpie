@@ -85,7 +85,14 @@
       {text: "You're welcome!", keywords: ["thank", "thanks"], single: true},
       {text: "Thank you!", keywords: ["i", "love", "code", "palace"], required: ["code", "palace"]},
       {text: "Here’s some advice: take things one step at a time. 🌱", keywords: ["give", "advice"], required: ["advice"]},
-      {text: "I like to eat binary numbers and delicious data packets! 🍽️", keywords: ["what", "you", "eat"], required: ["you", "eat"]}
+      {text: "I like to eat binary numbers and delicious data packets! 🍽️", keywords: ["what", "you", "like", "eat"], required: ["you", "eat"]},
+      {text: "I'm here to help you anytime you need! 😊", keywords: ["help", "you", "there"], required: ["help"]},
+      {text: "I'm just a bunch of code, but I'm here to chat!", keywords: ["who", "are", "you"], required: ["who"]},
+      {text: "Nice to know", keywords:  ["how", "are", "you", "doing", "today?"], required: ["today", "doing"]},
+      {text: "You are my best friend!", keywords:  ["you", "are", "my", "best", "friend"], required: ["best", "friend"]},
+      {text: "Just use a calculator app on your device!", keywords:  ["can", "you", "help", "me", "with", "math"], required: ["help", "math"]},
+      {text: "I'm here to listen. What's on your mind?", keywords:  ["i", "feel", "sad"], required: ["sad"]},
+      {text: "Remember, every day is a new opportunity to grow and improve. 🌟", keywords:  ["i", "feel", "stuck", "sad", "need", "help"], required: ["feel"]},
     ];
 
     function messageProbability(userWords, recognisedWords, single = false, required = []) {
@@ -120,7 +127,7 @@
       }
 
       const bestMatch = Object.keys(probs).reduce((a, b) => probs[a] > probs[b] ? a : b);
-      return probs[bestMatch] < 1 ? "I didn't quite get that 🤔" : bestMatch;
+      return probs[bestMatch] < 1 ? "Try again and you will succeed" : bestMatch;
     }
 
     function getResponse(userText) {
@@ -151,3 +158,4 @@
   </script>
 </body>
 </html>
+
