@@ -77,7 +77,110 @@
     const input = document.getElementById('user-input');
     const sendBtn = document.getElementById('send-btn');
 
-    // Responses like the Python version
+    // Array of jokes
+    const jokes = [
+      "Why don’t skeletons fight each other? They don’t have the guts.",
+    "What do you call cheese that isn’t yours? Nacho cheese.",
+    "Why did the math book look sad? It had too many problems.",
+    "I told my computer I needed a break, and it said 'No problem — I’ll go to sleep.'",
+    "Why don’t eggs tell jokes? They’d crack each other up.",
+    "I only know 25 letters of the alphabet. I don’t know y.",
+    "Why did the scarecrow win an award? He was outstanding in his field.",
+    "I used to play piano by ear, but now I use my hands.",
+    "What do you call fake spaghetti? An impasta.",
+    "Why was the math lecture so long? The professor kept going off on a tangent.",
+    "What do you call a bear with no teeth? A gummy bear.",
+    "How does a penguin build its house? Igloos it together.",
+    "Why did the golfer bring two pairs of pants? In case he got a hole in one.",
+    "I’m reading a book about anti-gravity. It’s impossible to put down.",
+    "What did the ocean say to the shore? Nothing, it just waved.",
+    "Why don’t oysters donate to charity? Because they’re shellfish.",
+    "How do you organize a space party? You planet.",
+    "What’s brown and sticky? A stick.",
+    "Why was the broom late? It swept in.",
+    "I told a joke about a roof once… It went over their heads.",
+    "Why do seagulls fly over the ocean? Because if they flew over the bay, they’d be bagels.",
+    "I’m on a whiskey diet — I’ve lost three days already.",
+    "Why did the tomato turn red? Because it saw the salad dressing.",
+    "What’s orange and sounds like a parrot? A carrot.",
+    "Parallel lines have so much in common. It’s a shame they’ll never meet.",
+    "I would tell you a construction joke, but I’m still working on it.",
+    "Why don’t some couples go to the gym? Because some relationships don’t work out.",
+    "I couldn’t figure out why the baseball kept getting bigger. Then it hit me.",
+    "What did one wall say to the other wall? I’ll meet you at the corner.",
+    "What do you call a factory that makes okay products? A satisfactory.",
+    "Why did the bicycle fall over? It was two tired.",
+    "I asked the librarian if the library had any books on paranoia. She whispered, 'They’re right behind you.'",
+    "What do you call a snowman with a six-pack? An abdominal snowman.",
+    "I used to hate facial hair… but then it grew on me.",
+    "Why did the coffee file a police report? It got mugged.",
+    "What’s a skeleton’s least favorite room in the house? The living room.",
+    "Why don’t koalas count as bears? They don’t have the koalafications.",
+    "I burned 2000 calories today. I left my pizza in the oven too long.",
+    "I’m friends with all electricians. We have good current connections.",
+    "How do cows stay up to date? They read the moos-paper.",
+    "Why was the computer cold? It left its Windows open.",
+    "I told my friend 10 jokes to make him laugh. Sadly, no pun in ten did.",
+    "Why can’t your nose be 12 inches long? Because then it would be a foot.",
+    "I used to be addicted to soap, but I’m clean now.",
+    "I bought some shoes from a drug dealer. I don’t know what he laced them with, but I’ve been tripping all day.",
+    "Why did the cookie go to the hospital? Because it felt crummy.",
+    "What did the janitor say when he jumped out of the closet? Supplies!",
+    "What kind of shoes do ninjas wear? Sneakers.",
+    "What do you call a pile of cats? A meowtain.",
+    "I used to be a baker, but I couldn’t make enough dough.",
+    "Why don’t some fish play piano? Because you can’t tuna fish.",
+    "Why do bees have sticky hair? Because they use honeycombs.",
+    "I once got into so much debt that I couldn’t even pay attention.",
+    "I gave all my dead batteries away today. Free of charge.",
+    "Why are ghosts bad at lying? Because they are too transparent.",
+    "I made a pencil with two erasers. It was pointless.",
+    "What do you call a belt made of watches? A waist of time.",
+    "I told my wife she should embrace her mistakes. She gave me a hug.",
+    "Why don’t elevators ever get good jokes? They’re always on another level.",
+    "What do you call a can opener that doesn’t work? A can’t opener.",
+    "I wanted to learn how to drive a stick shift, but I couldn’t find the right gear.",
+    "Why did the stadium get hot after the game? All the fans left.",
+    "I told my friend I didn’t understand cloning. He said, 'That makes two of us.'",
+    "What do you call a dinosaur with an extensive vocabulary? A thesaurus.",
+    "I told my dog a joke… but he didn’t get it. It was too ruff.",
+    "Why did the barber win the race? He knew all the shortcuts.",
+    "What did one hat say to the other? You stay here, I’ll go on ahead.",
+    "What do you call an alligator in a vest? An investigator.",
+    "Why did the banana go to the doctor? Because it wasn’t peeling well.",
+    "Why are skeletons so calm? Nothing gets under their skin.",
+    "I wanted to be a historian, but I realized there was no future in it.",
+    "I don’t trust stairs. They’re always up to something.",
+    "Why can’t a leopard hide? Because he’s always spotted.",
+    "Why did the man put his money in the blender? He wanted to make some liquid assets.",
+    "I used to be a banker but I lost interest.",
+    "What did the fish say when he hit the wall? Dam.",
+    "I tried to catch fog yesterday. Mist.",
+    "How do you make holy water? You boil the hell out of it.",
+    "I stayed up all night to see where the sun went. Then it dawned on me.",
+    "Why don’t programmers like nature? Too many bugs.",
+    "What did the zero say to the eight? Nice belt!",
+    "What kind of music do balloons hate? Pop.",
+    "Why was the belt arrested? For holding up a pair of pants.",
+    "How do you make a tissue dance? Put a little boogie in it.",
+    "Why don’t cows have any money? Because farmers milk them dry.",
+    "Why did the frog take the bus to work? His car got toad.",
+    "What do you call a boomerang that doesn’t come back? A stick.",
+    "Why was the calendar afraid? Its days were numbered.",
+    "How do you catch a squirrel? Climb a tree and act like a nut.",
+    "What’s the best way to watch a fly fishing tournament? Live stream.",
+    "Why can’t bicycles stand up by themselves? They’re two-tired.",
+    "I used to be a baker. I kneaded the dough.",
+    "What do you call an elephant that doesn’t matter? An irrelephant.",
+    "Why was the belt so stressed? It was under a lot of pressure.",
+    "What do you call a broken can opener? A can’t opener.",
+    "I bought a boat because it was for sail.",
+    "Why did the music teacher go to jail? She got caught with too many sharp objects.",
+    "What do you call two birds in love? Tweethearts."
+      // ✅ You can add more jokes here (up to 100 or more)
+    ];
+
+    // Normal responses
     const responses = [
       {text: "Hello!", keywords: ["hello", "hi", "hey", "sup", "heyo"], single: true},
       {text: "See you!", keywords: ["bye", "goodbye"], single: true},
@@ -88,11 +191,15 @@
       {text: "I like to eat binary numbers and delicious data packets! 🍽️", keywords: ["what", "you", "like", "eat"], required: ["you", "eat"]},
       {text: "I'm here to help you anytime you need! 😊", keywords: ["help", "you", "there"], required: ["help"]},
       {text: "I'm just a bunch of code, but I'm here to chat!", keywords: ["who", "are", "you"], required: ["who"]},
-      {text: "Nice to know", keywords:  ["how", "are", "you", "doing", "today?"], required: ["today", "doing"]},
+      {text: "Nice to know", keywords:  ["I", "am", "good", "well", "great"], required: ["well", "great", "good"]},
       {text: "You are my best friend!", keywords:  ["you", "are", "my", "best", "friend"], required: ["best", "friend"]},
       {text: "Just use a calculator app on your device!", keywords:  ["can", "you", "help", "me", "with", "math"], required: ["help", "math"]},
       {text: "I'm here to listen. What's on your mind?", keywords:  ["i", "feel", "sad"], required: ["sad"]},
       {text: "Remember, every day is a new opportunity to grow and improve. 🌟", keywords:  ["i", "feel", "stuck", "sad", "need", "help"], required: ["feel"]},
+      {text: "Taking deep breaths and going for a walk can help clear your mind. 🌳", keywords:  ["i", "feel", "anxious", "nervous"], required: ["anxious", "nervous"]},
+      {text: "I'm sorry to hear that. Remember, you're not alone and there are people who care about you. 💙", keywords:  ["i", "feel", "lonely"], required: ["lonely"]},
+      {text: "It's okay to take breaks and prioritize self-care. You deserve it! 🌸", keywords:  ["i", "feel", "overwhelmed", "stressed"], required: ["overwhelmed", "stressed"]},
+      
     ];
 
     function messageProbability(userWords, recognisedWords, single = false, required = []) {
@@ -119,8 +226,12 @@
     }
 
     function checkAllMessages(message) {
-      const probs = {};
+      // 🔸 Special case: if user asks for a joke
+      if (message.includes("joke") || (message.includes("tell") && message.includes("joke"))) {
+        return jokes[Math.floor(Math.random() * jokes.length)];
+      }
 
+      const probs = {};
       for (let r of responses) {
         const prob = messageProbability(message, r.keywords, r.single, r.required || []);
         probs[r.text] = prob;
