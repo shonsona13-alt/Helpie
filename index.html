@@ -177,7 +177,6 @@
     "I bought a boat because it was for sail.",
     "Why did the music teacher go to jail? She got caught with too many sharp objects.",
     "What do you call two birds in love? Tweethearts."
-      // ✅ You can add more jokes here (up to 100 or more)
     ];
 
     // Normal responses
@@ -191,14 +190,16 @@
       {text: "I like to eat binary numbers and delicious data packets! 🍽️", keywords: ["what", "you", "like", "eat"], required: ["you", "eat"]},
       {text: "I'm here to help you anytime you need! 😊", keywords: ["help", "you", "there"], required: ["help"]},
       {text: "I'm just a bunch of code, but I'm here to chat!", keywords: ["who", "are", "you"], required: ["who"]},
-      {text: "Nice to know", keywords:  ["I", "am", "good", "well", "great"], required: ["well", "great", "good"]},
+      {text: "Nice to know", keywords:  ["i", "am", "good"], required: ["good"]},
       {text: "You are my best friend!", keywords:  ["you", "are", "my", "best", "friend"], required: ["best", "friend"]},
-      {text: "Just use a calculator app on your device!", keywords:  ["can", "you", "help", "me", "with", "math"], required: ["help", "math"]},
+      {text: "Just use the calculator app on your device!", keywords:  ["can", "you", "help", "me", "with", "math"], required: ["help", "math"]},
       {text: "I'm here to listen. What's on your mind?", keywords:  ["i", "feel", "sad"], required: ["sad"]},
       {text: "Remember, every day is a new opportunity to grow and improve. 🌟", keywords:  ["i", "feel", "stuck", "sad", "need", "help"], required: ["feel"]},
       {text: "Taking deep breaths and going for a walk can help clear your mind. 🌳", keywords:  ["i", "feel", "anxious", "nervous"], required: ["anxious", "nervous"]},
       {text: "I'm sorry to hear that. Remember, you're not alone and there are people who care about you. 💙", keywords:  ["i", "feel", "lonely"], required: ["lonely"]},
       {text: "It's okay to take breaks and prioritize self-care. You deserve it! 🌸", keywords:  ["i", "feel", "overwhelmed", "stressed"], required: ["overwhelmed", "stressed"]},
+      {text: "Nice to hear that!", keywords:  ["i", "feel", "am" ,"happy"], required: ["happy"]},
+      {text: "That's great to hear! Keep up the positive vibes! 😊", keywords:  ["i", "feel", "great"], required: ["great"]},
       
     ];
 
@@ -238,7 +239,7 @@
       }
 
       const bestMatch = Object.keys(probs).reduce((a, b) => probs[a] > probs[b] ? a : b);
-      return probs[bestMatch] < 1 ? "Try again and you will succeed" : bestMatch;
+      return probs[bestMatch] < 1 ? "Keep on trying" : bestMatch;
     }
 
     function getResponse(userText) {
